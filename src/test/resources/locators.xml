@@ -1,0 +1,11 @@
+<Locators>
+
+    <LoginPage>
+        <DIV_WITH_TEXT>xpath=//div[text()='{0}']</DIV_WITH_TEXT>
+        <DIV_WITH_ID>xpath=//div[contains(@id,'{0}')]</DIV_WITH_ID>
+        <USERNAME>id=user-name</USERNAME>
+        <PASSWORD>id=password</PASSWORD>
+        <LOGIN_BUTTON>id=login-button</LOGIN_BUTTON>
+    </LoginPage>
+
+</Locators>
