@@ -4,6 +4,13 @@ target/
 !**/src/test/**/target/
 .kotlin
 
+### Test Reports and Logs ###
+allure-results/
+allure-report/
+test-output/
+*.log
+logs/
+
 ### IntelliJ IDEA ###
 .idea/modules.xml
 .idea/jarRepositories.xml

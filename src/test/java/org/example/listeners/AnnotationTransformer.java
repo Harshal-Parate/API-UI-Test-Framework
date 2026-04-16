@@ -1,6 +1,7 @@
 package org.example.listeners;
 
 import org.testng.IAnnotationTransformer;
+import org.testng.IRetryAnalyzer;
 import org.testng.annotations.ITestAnnotation;
 
 import java.lang.reflect.Method;
@@ -12,6 +13,6 @@ public class AnnotationTransformer implements IAnnotationTransformer {
                           Class testClass,
                           java.lang.reflect.Constructor testConstructor,
                           Method testMethod) {
-        annotation.setRetryAnalyzer(RetryAnalyzer.class);
+        annotation.setRetryAnalyzer((Class<? extends IRetryAnalyzer>) RetryAnalyzer.class);
     }
 }

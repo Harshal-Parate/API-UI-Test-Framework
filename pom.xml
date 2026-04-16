@@ -17,6 +17,12 @@
         <restassured.version>5.5.6</restassured.version>
         <allure.version>2.20.1</allure.version>
         <poi.version>5.4.1</poi.version>
+        <webdrivermanager.version>5.10.0</webdrivermanager.version>
+        <logback.version>1.5.20</logback.version>
+        <jackson.version>2.18.3</jackson.version>
+        <assertj.version>3.27.3</assertj.version>
+        <slf4j.version>2.0.17</slf4j.version>
+        <lombok.version>1.18.36</lombok.version>
     </properties>
 
 
@@ -70,13 +76,6 @@
             <version>${restassured.version}</version>
         </dependency>
 
-        <!-- WebDriverManager -->
-        <dependency>
-            <groupId>io.github.bonigarcia</groupId>
-            <artifactId>webdrivermanager</artifactId>
-            <version>5.5.1</version>
-        </dependency>
-
         <!-- Reporting -->
         <dependency>
             <groupId>io.qameta.allure</groupId>
@@ -88,20 +87,20 @@
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
-            <version>2.0.9</version>
+            <version>${slf4j.version}</version>
         </dependency>
 
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
-            <version>1.4.11</version>
+            <version>${logback.version}</version>
         </dependency>
 
         <!-- JSON -->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
-            <version>2.17.0</version>
+            <version>${jackson.version}</version>
         </dependency>
 
         <!-- Excel -->
@@ -121,7 +120,7 @@
         <dependency>
             <groupId>org.assertj</groupId>
             <artifactId>assertj-core</artifactId>
-            <version>3.27.6</version>
+            <version>${assertj.version}</version>
         </dependency>
 
         <!-- WireMock (API Mocking) -->
@@ -135,14 +134,8 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.18.26</version>
+            <version>${lombok.version}</version>
             <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.testng</groupId>
-            <artifactId>testng</artifactId>
-            <version>7.11.0</version>
-            <scope>compile</scope>
         </dependency>
 
     </dependencies>
@@ -174,9 +167,9 @@
                     </suiteXmlFiles>
 
                     <systemPropertyVariables>
-                        <env>${env}</env>
-                        <browser>${browser}</browser>
-                        <threads>${threads}</threads>
+                        <env>${env.name}</env>
+                        <browser>${browser.name}</browser>
+                        <threads>${thread.count}</threads>
                     </systemPropertyVariables>
 
                 </configuration>

@@ -97,15 +97,22 @@ public class DriverFactory {
     }
 
     private static void applyTimeouts(WebDriver driver) {
-        int implicitWait = Integer.parseInt(getConfig("implicitWait", "3"));
-        int pageLoadTimeout = Integer.parseInt(getConfig("pageLoadTimeout", "20"));
-        int scriptTimeout = Integer.parseInt(getConfig("scriptTimeout", "10"));
+        try {
+            int implicitWait = Integer.parseInt(getConfig("implicitWait", "3"));
+            int pageLoadTimeout = Integer.parseInt(getConfig("pageLoadTimeout", "20"));
+            int scriptTimeout = Integer.parseInt(getConfig("scriptTimeout", "10"));
 
-        driver.manage().window().maximize();
+            driver.manage().window().maximize();
 
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(implicitWait));
-        driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(pageLoadTimeout));
-        driver.manage().timeouts().scriptTimeout(Duration.ofSeconds(scriptTimeout));
+            driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(implicitWait));
+            driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(pageLoadTimeout));
+            driver.manage().timeouts().scriptTimeout(Duration.ofSeconds(scriptTimeout));
+
+            LoggerUtil.info("Timeouts configured successfully");
+        } catch (NumberFormatException e) {
+            LoggerUtil.error("Invalid timeout configuration: " + e.getMessage());
+            throw new RuntimeException("Failed to configure timeouts", e);
+        }
     }
 
     public static WebDriver getDriver() {
@@ -114,8 +121,14 @@ public class DriverFactory {
 
     public static void quitDriver() {
         if (driver.get() != null) {
-            driver.get().quit();
-            driver.remove();
+            try {
+                driver.get().quit();
+                LoggerUtil.info("Driver quit successfully");
+            } catch (Exception e) {
+                LoggerUtil.error("Error while quitting driver: " + e.getMessage());
+            } finally {
+                driver.remove();
+            }
         }
     }
 }

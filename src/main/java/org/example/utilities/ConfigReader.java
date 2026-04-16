@@ -25,6 +25,15 @@ public class ConfigReader {
     }
 
     public static String get(String key) {
-        return properties.getProperty(key).trim();
+        String value = properties.getProperty(key);
+        if (value == null) {
+            throw new IllegalArgumentException("Property '" + key + "' not found in configuration file");
+        }
+        return value.trim();
+    }
+
+    public static String get(String key, String defaultValue) {
+        String value = properties.getProperty(key);
+        return value != null ? value.trim() : defaultValue;
     }
 }
